@@ -10,6 +10,8 @@ public class Item : ScriptableObject
 
     [Header("UI")]
     public bool stackable = true;
+    public string objectName;
+    public string description;
 
     [Header("Both")]
     public Sprite image;
