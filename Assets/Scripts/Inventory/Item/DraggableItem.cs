@@ -4,15 +4,27 @@ using UnityEngine.UI;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    [HideInInspector] public Transform parentAfterDrag;
+    [Header("UI")]
     public Image image;
+    public Text countText;
 
-    [HideInInspector]public Item item;
+    [HideInInspector] public Transform parentAfterDrag;
+    [HideInInspector] public Item item;
+    [HideInInspector]public int count = 1;
 
     public void InitialiseItem(Item newItem)
     {
         item = newItem;
         image.sprite = newItem.image;
+        RefreshCount();
+    }
+
+    public void RefreshCount()
+    {
+        countText.text = count.ToString();
+        bool textActive = count > 1;
+        countText.gameObject.SetActive(textActive);
+        countText.raycastTarget = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
