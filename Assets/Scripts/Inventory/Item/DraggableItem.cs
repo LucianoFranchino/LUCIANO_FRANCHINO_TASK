@@ -7,6 +7,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     [HideInInspector] public Transform parentAfterDrag;
     public Image image;
 
+    [HideInInspector]public Item item;
+
+    public void InitialiseItem(Item newItem)
+    {
+        item = newItem;
+        image.sprite = newItem.image;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         parentAfterDrag = transform.parent;
