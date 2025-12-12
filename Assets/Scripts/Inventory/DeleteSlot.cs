@@ -10,6 +10,11 @@ public class DeleteSlot : MonoBehaviour, IDropHandler
 
         if (draggableItem != null)
         {
+            if (EquipmentManager.Instance.GetCurrentEquippedItem() == draggableItem.item)
+            {
+                EquipmentManager.Instance.UnequipItem();
+            }
+
             Destroy(dropped);
         }
     }
