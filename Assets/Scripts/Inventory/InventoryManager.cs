@@ -3,10 +3,24 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager Instance { get; private set; }
 
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
     [SerializeField] private GameObject showInventory;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public bool AddItem(Item item)
     {
         //coloca el objeto en el mismo slot si es igual
@@ -16,7 +30,7 @@ public class InventoryManager : MonoBehaviour
             DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
             if (itemInSlot != null &&
                 itemInSlot.item == item &&
-                itemInSlot.count < 10 &&
+                itemInSlot.count < 5 &&
                 itemInSlot.item.stackable == true)
             {
                 itemInSlot.count++;
@@ -47,9 +61,9 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            showInventory.SetActive(true);
+            showInventory.SetActive(!showInventory.activeSelf);
         }
     }
 }
