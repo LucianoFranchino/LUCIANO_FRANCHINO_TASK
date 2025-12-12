@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
 
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
-
+    [SerializeField] private GameObject showInventory;
     public bool AddItem(Item item)
     {
         //coloca el objeto en el mismo slot si es igual
@@ -43,5 +43,13 @@ public class InventoryManager : MonoBehaviour
         GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         DraggableItem inventoryItem = newItemGo.GetComponent<DraggableItem>();
         inventoryItem.InitialiseItem(item);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            showInventory.SetActive(true);
+        }
     }
 }
