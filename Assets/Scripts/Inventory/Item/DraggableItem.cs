@@ -60,7 +60,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (item.type == ItemType.Tool)
         {
-            // Equipar la herramienta
             EquipmentManager.Instance.EquipItem(item);
         }
         else if (item.type == ItemType.Consumable)

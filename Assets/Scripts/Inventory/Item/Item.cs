@@ -22,8 +22,7 @@ public enum ItemType
 {
     Tool,
     Consumable,
-    Tradding,
-    Drop
+    Tradding
 }
 
 public enum ActionType

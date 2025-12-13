@@ -79,20 +79,12 @@ public class EquipmentManager : MonoBehaviour
 
     private void RotateTowardsMouse()
     {
-        // Obtener posición del mouse en el mundo
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
-
-        // Calcular dirección desde el equipmentParent hacia el mouse
         Vector2 direction = (mousePosition - equipmentParent.position).normalized;
-
-        // Calcular ángulo
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Aplicar rotación al item equipado
         currentEquippedItem.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        // Flipear el sprite si apunta a la izquierda
         SpriteRenderer sr = currentEquippedItem.GetComponent<SpriteRenderer>();
         if (direction.x < 0)
         {

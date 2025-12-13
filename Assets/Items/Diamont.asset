@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Diamont
   m_EditorClassIdentifier: Assembly-CSharp::Item
   type: 2
-  actionType: 0
+  actionType: 2
   range: {x: 5, y: 4}
   stackable: 1
+  objectName: Diamont
+  description: You can use to buy things
   image: {fileID: 21300000, guid: 6b3b8ef492edc304f9230dc368e8af5c, type: 3}
