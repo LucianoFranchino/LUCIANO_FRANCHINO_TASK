@@ -64,7 +64,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
         else if (item.type == ItemType.Consumable)
         {
-            Debug.Log("Consumiendo: " + item.objectName);
+            
+            if (item.actionType == ActionType.Health)
+            {
+                PlayerHealth playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    // Usar el range.x como cantidad de curación
+                    playerHealth.Heal(item.range.x);
+                }
+            }
             count--;
             if (count <= 0)
             {

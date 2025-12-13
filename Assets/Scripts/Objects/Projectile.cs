@@ -28,10 +28,17 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") || collision.CompareTag("Wall"))
+        if (collision.CompareTag("Enemy"))
         {
-            // Aquí puedes agregar lógica de daño
-            Debug.Log("Proyectil impactó: " + collision.name);
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(1f);
+            }
+            ReturnToPool();
+        }
+        else if (collision.CompareTag("Wall"))
+        {
             ReturnToPool();
         }
     }
