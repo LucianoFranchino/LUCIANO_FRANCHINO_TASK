@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba34736fc709c634483bed1991cc4535, type: 3}
   m_Name: Diamont
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  type: 2
+  type: 1
   actionType: 2
   range: {x: 5, y: 4}
   stackable: 1
