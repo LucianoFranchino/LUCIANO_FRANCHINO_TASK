@@ -4,6 +4,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float lifetime = 3f;
+    [SerializeField] AudioClip hitSound;
 
     private Vector2 direction;
     private float timer;
@@ -34,6 +35,7 @@ public class Projectile : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(1f);
+                AudioManager.instance.PlayAudio(hitSound);
             }
             ReturnToPool();
         }

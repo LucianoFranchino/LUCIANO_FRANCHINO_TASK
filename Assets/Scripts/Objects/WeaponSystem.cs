@@ -9,6 +9,7 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] private float fireRate = 0.5f;
     public Item staffWeapon;
 
+    [SerializeField] private AudioClip shootSound;
     private float nextFireTime = 0f;
 
     private void Awake()
@@ -48,7 +49,7 @@ public class WeaponSystem : MonoBehaviour
     {
         GameObject projectile = ObjectPool.Instance.GetProjectile();
         projectile.transform.position = shootPoint.position;
-
+        AudioManager.instance.PlayAudio(shootSound);
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
