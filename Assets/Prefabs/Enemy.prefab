@@ -163,10 +163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b205c2ad506ec4e8727c8e5651ca04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  detectionRange: 4
-  attackRange: 1.5
+  detectionRange: 5
+  attackRange: 1
   moveSpeed: 2
   damage: 1
   attackCooldown: 1.5
   health: 1
+  drop: {fileID: 5303119926475982244, guid: 3da51e2327755ea4f9d2c4a93f905a5e, type: 3}
   horizontalParameter: Horizontal

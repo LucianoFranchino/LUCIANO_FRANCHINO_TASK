@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Detection")]
-    [SerializeField] private float detectionRange = 5f; 
+    [SerializeField] private float detectionRange = 5f;
     [SerializeField] private float attackRange = 1.5f;
 
     [Header("Movement")]
@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     [Header("Health")]
     public float health = 1f;
     private bool isDead = false;
+    [SerializeField] GameObject drop;
 
     [Header("Animation")]
     public string horizontalParameter = "Horizontal";
@@ -135,14 +136,21 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
         isDead = true;
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = false;
+        }
         if (animator != null)
         {
             animator.Play("Enemy_Die");
         }
-        Collider2D col = GetComponent<Collider2D>();
-        if (col != null) col.enabled = false;
-
+        if (drop != null)
+        {
+            Instantiate(drop, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject, 1f);
     }
 
