@@ -154,14 +154,4 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 1f);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        // Rango de detección (amarillo)
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-        // Rango de ataque (rojo)
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
 }

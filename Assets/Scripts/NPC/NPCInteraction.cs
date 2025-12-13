@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class NPCInteraction : MonoBehaviour
@@ -14,7 +15,6 @@ public class NPCInteraction : MonoBehaviour
     public Item requiredItem; 
     public int requiredAmount = 3; 
     public Item rewardItem;
-    public string questCompletedText = "¡Gracias! Aquí está tu recompensa.";
 
     private Transform player;
     private bool playerInRange = false;
@@ -135,15 +135,15 @@ public class NPCInteraction : MonoBehaviour
         {
             InventoryManager.Instance.AddItem(rewardItem);
         }
-
         questCompleted = true;
-        isShowingDialogue = true;
-        NPCDialogue.Instance.ShowDialogue(questCompletedText);
-        NPCDialogue.Instance.ShowInteractionPrompt(false);
-
-        Debug.Log("¡Quest completada!");
+        StartCoroutine(WaitScreen());
     }
 
+    private IEnumerator WaitScreen()
+    {
+        yield return new WaitForSeconds(3f);
+        VictoryPanel.Instance.ShowVictory();
+    }
     private void RemoveItemsFromInventory(Item item, int amount)
     {
         int remainingToRemove = amount;
