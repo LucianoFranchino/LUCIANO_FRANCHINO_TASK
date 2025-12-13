@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;
-    public float lifetime = 3f;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float lifetime = 3f;
 
     private Vector2 direction;
     private float timer;
@@ -35,10 +35,6 @@ public class Projectile : MonoBehaviour
             {
                 enemy.TakeDamage(1f);
             }
-            ReturnToPool();
-        }
-        else if (collision.CompareTag("Wall"))
-        {
             ReturnToPool();
         }
     }

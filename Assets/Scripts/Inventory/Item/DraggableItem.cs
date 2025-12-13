@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler, IPointerEnterHandler
 {
     [Header("UI")]
     public Image image;
@@ -70,7 +70,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                 PlayerHealth playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {
-                    // Usar el range.x como cantidad de curación
                     playerHealth.Heal(item.range.x);
                 }
             }
@@ -90,4 +89,10 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             }
         }
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ItemInfoPanel.Instance.ShowItemInfo(item);
+    }
+
 }

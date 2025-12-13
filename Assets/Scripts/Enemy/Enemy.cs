@@ -4,22 +4,22 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Detection")]
-    public float detectionRange = 5f; // Distancia para detectar al jugador
-    public float attackRange = 1.5f; // Distancia para atacar
+    [SerializeField] private float detectionRange = 5f; 
+    [SerializeField] private float attackRange = 1.5f;
 
     [Header("Movement")]
-    public float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 2f;
 
     [Header("Attack")]
     public float damage = 1f;
-    public float attackCooldown = 1.5f; // Tiempo entre ataques
+    [SerializeField] private float attackCooldown = 1.5f;
 
     [Header("Health")]
     public float health = 1f;
     private bool isDead = false;
 
     [Header("Animation")]
-    public string horizontalParameter = "Horizontal"; // Parámetro del Blend Tree
+    public string horizontalParameter = "Horizontal";
 
     private PlayerHealth playerHealth;
     private Transform player;

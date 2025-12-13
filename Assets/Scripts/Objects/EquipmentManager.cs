@@ -57,7 +57,6 @@ public class EquipmentManager : MonoBehaviour
         currentEquippedItem = equippedObject;
         currentEquippedItemData = item;
 
-        Debug.Log("Equipado: " + item.objectName);
         return true;
     }
 
@@ -68,7 +67,6 @@ public class EquipmentManager : MonoBehaviour
             Destroy(currentEquippedItem);
             currentEquippedItem = null;
             currentEquippedItemData = null;
-            Debug.Log("Item desequipado");
         }
     }
 

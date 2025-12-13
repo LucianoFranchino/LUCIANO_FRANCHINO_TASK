@@ -9,15 +9,7 @@ public class ItemPickUp : MonoBehaviour
         {
             bool wasAdded = InventoryManager.Instance.AddItem(item);
 
-            if (wasAdded)
-            {
-                Debug.Log("Item recogido: " + item.objectName);
-                Destroy(gameObject);
-            }
-            else
-            {
-                Debug.Log("Inventario lleno!");
-            }
+            if (wasAdded) Destroy(gameObject);
         }
     }
 }

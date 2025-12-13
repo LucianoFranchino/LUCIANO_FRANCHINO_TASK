@@ -10,10 +10,10 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     [Header("UI (Solo para jugador)")]
-    public Slider healthSlider;
+    [SerializeField] private Slider healthSlider;
 
     [Header("Death Settings")]
-    public float restartDelay = 2f;
+    [SerializeField] private float restartDelay = 2f;
 
     private Animator animator;
     private bool isDead = false;

@@ -23,7 +23,6 @@ public class InventoryManager : MonoBehaviour
     }
     public bool AddItem(Item item)
     {
-        //coloca el objeto en el mismo slot si es igual
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             InventorySlot slot = inventorySlots[i];
@@ -38,7 +37,7 @@ public class InventoryManager : MonoBehaviour
                 return true;
             }
         }
-        // Busca un slot vacio
+
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             InventorySlot slot = inventorySlots[i];

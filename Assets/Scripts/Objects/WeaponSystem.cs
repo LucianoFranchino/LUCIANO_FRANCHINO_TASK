@@ -5,8 +5,8 @@ public class WeaponSystem : MonoBehaviour
     public static WeaponSystem Instance { get; private set; }
 
     [Header("Shooting Settings")]
-    public Transform shootPoint;
-    public float fireRate = 0.5f;
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private float fireRate = 0.5f;
     public Item staffWeapon;
 
     private float nextFireTime = 0f;
