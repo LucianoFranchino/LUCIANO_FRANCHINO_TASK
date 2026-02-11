@@ -15,6 +15,7 @@ MonoBehaviour:
   type: 0
   actionType: 0
   range: {x: 5, y: 4}
+  toolType: 3
   stackable: 0
   objectName: Magical Staff
   description: A mysterious staff that shoots dark energy
