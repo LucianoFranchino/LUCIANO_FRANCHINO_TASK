@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler, IPointerEnterHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler//, IPointerEnterHandler
 {
     [Header("UI")]
     public Image image;
@@ -12,6 +12,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public Item item;
     [HideInInspector]public int count = 1;
+
+    private CraftingRecipe recipe;
 
     public void InitialiseItem(Item newItem)
     {
@@ -47,6 +49,15 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         image.raycastTarget = true;
 
     }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    CraftingTooltipUI.Instance.Show(recipe);
+    //}
+
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    CraftingTooltipUI.Instance.Hide();
+    //}
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -90,9 +101,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        ItemInfoPanel.Instance.ShowItemInfo(item);
-    }
+   
 
 }

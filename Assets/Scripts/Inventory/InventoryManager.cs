@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -91,10 +90,8 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (Item item in allItems)
         {
-            if (item.name == itemName)
-            {
+            if (item.objectName == itemName || item.name == itemName)
                 return item;
-            }
         }
         Debug.LogWarning("Item no encontrado en database: " + itemName);
         return null;
@@ -104,16 +101,25 @@ public class InventoryManager : MonoBehaviour
     {
         SaveInventory();
     }
-    public bool AddItem(Item item)
+    public bool AddItem(Item item, int amount = 1)
     {
+        for (int i = 0; i < amount; i++)
+        {
+            if (!AddSingleItem(item)) return false;
+        }
+        return true;
+    }
+
+    private bool AddSingleItem(Item item)
+    {
+        // Primero intenta apilar en un slot existente
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            InventorySlot slot = inventorySlots[i];
-            DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
+            DraggableItem itemInSlot = inventorySlots[i].GetComponentInChildren<DraggableItem>();
             if (itemInSlot != null &&
                 itemInSlot.item == item &&
                 itemInSlot.count < 5 &&
-                itemInSlot.item.stackable == true)
+                itemInSlot.item.stackable)
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
@@ -121,17 +127,57 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        // Si no, busca un slot vacío
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            InventorySlot slot = inventorySlots[i];
-            DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
-            if(itemInSlot == null)
+            DraggableItem itemInSlot = inventorySlots[i].GetComponentInChildren<DraggableItem>();
+            if (itemInSlot == null)
             {
-                SpawnItem(item, slot);
+                SpawnItem(item, inventorySlots[i]);
                 return true;
             }
         }
-        return false;
+
+        return false; // inventario lleno
+    }
+
+    public bool RemoveItem(string itemName, int amount)
+    {
+        int totalFound = GetItemCount(itemName);
+        if (totalFound < amount) return false; // no hay suficiente
+
+        int remaining = amount;
+
+        for (int i = inventorySlots.Length - 1; i >= 0 && remaining > 0; i--)
+        {
+            DraggableItem itemInSlot = inventorySlots[i].GetComponentInChildren<DraggableItem>();
+            if (itemInSlot != null && itemInSlot.item.objectName == itemName)
+            {
+                int toRemove = Mathf.Min(remaining, itemInSlot.count);
+                itemInSlot.count -= toRemove;
+                remaining -= toRemove;
+
+                if (itemInSlot.count <= 0)
+                    Destroy(itemInSlot.gameObject);
+                else
+                    itemInSlot.RefreshCount();
+            }
+        }
+
+        SaveInventory();
+        return true;
+    }
+
+    public int GetItemCount(string itemName)
+    {
+        int total = 0;
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
+            if (itemInSlot != null && itemInSlot.item.objectName == itemName)
+                total += itemInSlot.count;
+        }
+        return total;
     }
 
     void SpawnItem(Item item, InventorySlot slot)
